@@ -44,7 +44,7 @@ contract Marketplace {
         owner = msg.sender;
     }
 
-    function createProduct(string memory name, uint price) public {
+    function createProduct(string memory name, uint price) external {
         require(price > 0, "Price must be greater than 0");
         productCount++;
         products[productCount] = Product(productCount, msg.sender, name, price);
@@ -52,7 +52,7 @@ contract Marketplace {
         emit ProductCreated(productCount, msg.sender, name, price);
     }
 
-    function purchaseProduct(uint productId) public payable {
+    function purchaseProduct(uint productId) external payable {
         Product storage product = products[productId];
         require(msg.value == product.price, "Wrong amount");
 
@@ -70,7 +70,7 @@ contract Marketplace {
         emit ProductPurchased(productId, msg.sender, block.timestamp);
     }
 
-    function withdrawBalance() public {
+    function withdrawBalance() external {
         uint balance = sellerFunds[msg.sender];
         require(balance > 0, "No funds to withdraw");
         sellerFunds[msg.sender] = 0;
@@ -78,7 +78,7 @@ contract Marketplace {
         require(success, "Transfer to seller failed");
     }
 
-    function getSellerProducts() public view returns (Product[] memory) {
+    function getSellerProducts() external view returns (Product[] memory) {
         uint[] storage productIds = sellerSoldProducts[msg.sender];
         Product[] memory result = new Product[](productIds.length);
 
@@ -87,5 +87,33 @@ contract Marketplace {
         }
 
         return result;
+    }
+
+    function getPurchasesFromAddress(
+        address _address
+    ) external view returns (Purchase[] memory) {
+        uint count = 0;
+
+        for (uint i = 1; i <= purchaseCount; i++) {
+            if (purchases[i].buyer == _address) {
+                count++;
+            }
+        }
+
+        Purchase[] memory result = new Purchase[](count);
+        uint index = 0;
+
+        for (uint i = 1; i <= purchaseCount; i++) {
+            if (purchases[i].buyer == _address) {
+                result[index] = purchases[i];
+                index++;
+            }
+        }
+
+        return result;
+    }
+
+    function getSellerBalance(address seller) external view returns (uint) {
+        return sellerFunds[seller];
     }
 }
