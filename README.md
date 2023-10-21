@@ -28,7 +28,9 @@ The purpose was not to built a groundbreaking Marketplace, but a simple elegant 
 
 ### Deployment commands example
 
+```sh
 forge create --rpc-url $RPC_URL --private-key $PRIVATE_KEY src/Marketplace.sol:Marketplace --legacy
+```
 
 ### Deployments
 
