@@ -45,3 +45,8 @@ Deployed to: 0x079ae838078578559E61b3F3eF8C8c7dDE4E5A63
 
 Deployed to: 0x7ca484e8D02297436aBe799624F766417A8C91Da
 Transaction hash: 0x226d433eff721580e911e1bac7a94ead2e0ff119712b5be60407fbb0c90b2f1b
+
+**Polygon zkEVM Testnet Deployment**
+
+Deployed to: 0x535791515adeB452cDAA87C088849C8A2e4ef8b1
+Transaction hash: 0xc2fabb6e018738d6ff94eb8713c64057f75f9b5f659d40e9de61a38e895eb213
